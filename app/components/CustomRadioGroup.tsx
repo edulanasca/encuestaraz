@@ -12,7 +12,7 @@ export default function CustomRadioGroup({prop, text, options}: CustomRadioGroup
   const {formData, updateFormData} = useFormContext();
 
   return (
-    <Box bg="blue.900" p={5} borderRadius="md">
+    <Box p={5} borderRadius="md">
       <Text fontSize="lg" fontWeight="bold" color="white" mb={4}>
         {text}
       </Text>

@@ -5,6 +5,7 @@ import {useFormContext} from "encuestaraz/app/FormContext";
 import {useRouter} from "next/navigation";
 import CustomRadioGroup from "encuestaraz/app/components/CustomRadioGroup";
 import NavigationButtons from "encuestaraz/app/components/NavigationButtons";
+import {Box} from "@chakra-ui/react";
 
 export default function Page() {
   const { updateFormData } = useFormContext();
@@ -16,7 +17,13 @@ export default function Page() {
   };
 
   return (
-    <>
+    <Box
+      bgImage="url('bgs/b3.jpg')"
+      bgPosition="center"
+      bgRepeat="no-repeat"
+      bgSize="cover"
+      minHeight="100vh"
+    >
       <CustomRadioGroup
         prop={"preferenciaCompra"}
         text={"¿En donde prefieres comprar ropa?"}
@@ -50,6 +57,6 @@ export default function Page() {
         ]}
       />
       <NavigationButtons next={"/clothing-preferences"} back={"/personal-info"}/>
-    </>
+    </Box>
   );
 }

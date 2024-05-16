@@ -1,6 +1,9 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import {Providers} from "encuestaraz/app/providers";
+import '@fontsource-variable/montserrat';  // Peso medio para Montserrat
+import '@fontsource-variable/bodoni-moda'; // Peso normal para Bodoni Moda
+
 
 export const metadata: Metadata = {
   title: "Encuestaraz",

@@ -2,7 +2,9 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
-  components: {
+  fonts: {
+    montserrat: 'Montserrat, sans-serif',
+    bodoniModa: 'Bodoni Moda, serif',
   },
 });
 
