@@ -1,4 +1,4 @@
-import {Button, Flex, useToast} from "@chakra-ui/react";
+import {Button, Flex, HStack, useToast} from "@chakra-ui/react";
 import {useRouter} from "next/navigation";
 import {useFormContext} from "encuestaraz/app/FormContext";
 
@@ -45,9 +45,36 @@ export default function NavigationButtons({next, back, isLastPage}: NavigationBu
   }
 
   return (
-    <Flex>
-      <Button onClick={goBack}>Retroceder</Button>
-      <Button onClick={goNext}>{isLastPage ? "Finalizar" : "Continuar"}</Button>
-    </Flex>
+    <HStack
+      gap={6}
+      justifyContent="center"
+    >
+      <Button
+        onClick={goBack}
+        colorScheme="unstyled"
+        size="sm"
+        textColor="rgb(203, 150, 71)"
+        borderBottom="2px solid rgb(203, 150, 71)"
+        borderBottomRadius={0}
+        borderBottomWidth="thick"
+        fontFamily="montserrat"
+        fontWeight="bold"
+      >
+        Retroceder
+      </Button>
+      <Button
+        onClick={goNext}
+        colorScheme="unstyled"
+        size="sm"
+        textColor="rgb(203, 150, 71)"
+        borderBottom="2px solid rgb(203, 150, 71)"
+        borderBottomRadius={0}
+        borderBottomWidth="thick"
+        fontFamily="montserrat"
+        fontWeight="bold"
+      >
+        {isLastPage ? "Finalizar" : "Continuar"}
+      </Button>
+    </HStack>
   );
 }

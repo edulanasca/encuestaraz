@@ -70,6 +70,7 @@ export default function Home() {
             >
               comenzar
             </Button>
+
           </Link>
         </Box>
       </Box>

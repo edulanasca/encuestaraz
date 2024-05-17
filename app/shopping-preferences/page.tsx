@@ -1,21 +1,12 @@
 'use client';
 
-import {FieldValues} from "react-hook-form";
-import {useFormContext} from "encuestaraz/app/FormContext";
-import {useRouter} from "next/navigation";
 import CustomRadioGroup from "encuestaraz/app/components/CustomRadioGroup";
 import NavigationButtons from "encuestaraz/app/components/NavigationButtons";
-import {Box} from "@chakra-ui/react";
+import {Box, Center} from "@chakra-ui/react";
+import Stepper from "encuestaraz/app/components/Stepper";
+import CustomDivider from "encuestaraz/app/components/CustomDivider";
 
 export default function Page() {
-  const { updateFormData } = useFormContext();
-  const router = useRouter();
-
-  const onSubmit = (data: FieldValues) => {
-    updateFormData(data);
-    router.push('/clothing-preferences');
-  };
-
   return (
     <Box
       bgImage="url('bgs/b3.jpg')"
@@ -24,6 +15,9 @@ export default function Page() {
       bgSize="cover"
       minHeight="100vh"
     >
+      <Center paddingTop={"50px"}>
+        <Stepper ix={1} total={3}/>
+      </Center>
       <CustomRadioGroup
         prop={"preferenciaCompra"}
         text={"¿En donde prefieres comprar ropa?"}
@@ -34,6 +28,7 @@ export default function Page() {
           "Totalmente en tienda fisica."
         ]}
       />
+      <CustomDivider/>
       <CustomRadioGroup
         prop={"metodoPagoFisica"}
         text={"¿Qué método de pago usas en tiendas físicas?"}
@@ -45,6 +40,7 @@ export default function Page() {
           "No hago compras en tienda física."
         ]}
       />
+      <CustomDivider/>
       <CustomRadioGroup
         prop={"metodoPagoOnline"}
         text={"¿Qué método de pago usas cuando compras por internet?"}
