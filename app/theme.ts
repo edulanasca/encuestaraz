@@ -6,6 +6,9 @@ const theme = extendTheme({
     montserrat: 'Montserrat, sans-serif',
     bodoniModa: 'Bodoni Moda, serif',
   },
+  colors: {
+    shoppingPreferencesCheckbox: "rgb(8, 17, 43)"
+  }
 });
 
 export default theme;

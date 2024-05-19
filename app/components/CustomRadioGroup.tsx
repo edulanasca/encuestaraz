@@ -1,52 +1,76 @@
-import {RadioGroup, Radio, Stack, Box, Text} from '@chakra-ui/react';
-import {useFormContext} from "encuestaraz/app/FormContext";
+import { Box, Text, useRadioGroup, Stack } from '@chakra-ui/react';
+import { useFormContext } from "encuestaraz/app/FormContext";
+import RadioCard from "./CustomRadio";
 import Encuestaraz from "encuestaraz/app/types/Encuestaraz";
 
 interface CustomRadioGroupProps {
-  prop: keyof Encuestaraz,
+  prop: keyof Encuestaraz;
   text: string;
-  options: string[]
+  options: string[];
 }
 
-export default function CustomRadioGroup({prop, text, options}: CustomRadioGroupProps) {
-  const {formData, updateFormData} = useFormContext();
+export default function CustomRadioGroup({ prop, text, options }: CustomRadioGroupProps) {
+  const { formData, updateFormData } = useFormContext();
+
+  const updateFunc = (newVal: string) => {
+    updateFormData({ ...formData, [prop]: newVal });
+  };
+
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: 'shoppingPreference',
+    defaultValue: formData[prop]?.toString(),
+    onChange: updateFunc,
+  });
+
+  const group = getRootProps();
 
   return (
     <Box p={5} borderRadius="md">
       <Text
         fontSize="lg"
         fontWeight="bold"
-        color={"rgb(196,213,249)"}
+        color="rgb(196,213,249)"
         mb={4}
-        fontFamily={"montserrat"}
+        fontFamily="montserrat"
         paddingLeft={6}
       >
         {text}
       </Text>
-      <RadioGroup
-        onChange={(val) => {
-          updateFormData({...formData, [prop]: val});
-        }}
-        value={formData[prop]?.toString()}
-        textColor={"rgb(196,213,249)"}
+      <Box
+        {...group}
+        textColor="rgb(196,213,249)"
       >
-        <Stack direction="column">
-          {
-            options.map(option => (
-              <Radio
+        <Stack
+          direction="column"
+          position="relative"
+          _after={{
+            content: '""',
+            height: "calc(100% - 10px)",
+            width: "6px",
+            bg: "shoppingPreferencesCheckbox",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            left: "5px",
+          }}
+        >
+          {options.map((option, index) => {
+            const shape = index === 0 ? 'top' : (index === options.length - 1 ? 'bottom' : 'middle');
+            const radio = getRadioProps({ value: option });
+            return (
+              <RadioCard
                 key={option}
-                value={option}
-                _checked={{bg: "rgb(202,149,71)", filter: "blur(1px)", border: "none"}}
-                bg={"rgb(8, 17, 43)"}
-                borderColor={"rgb(8, 17, 43)"}
+                {...radio}
+                shape={shape}
               >
                 <Text fontWeight={formData[prop] === option ? "bold" : undefined}>
                   {option}
                 </Text>
-              </Radio>))
-          }
+              </RadioCard>
+            );
+          })}
         </Stack>
-      </RadioGroup>
+      </Box>
     </Box>
   );
 }
