@@ -25,7 +25,7 @@ export default function CustomRadioGroup({ prop, text, options }: CustomRadioGro
   const group = getRootProps();
 
   return (
-    <Box p={5} borderRadius="md">
+    <Box py={4} px={8} borderRadius="md">
       <Text
         fontSize="lg"
         fontWeight="bold"

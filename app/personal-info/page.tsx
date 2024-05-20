@@ -4,8 +4,15 @@ import CustomInput from "../components/CustomInput";
 import NavigationButtons from "encuestaraz/app/components/NavigationButtons";
 import {Box, Center, VStack} from "@chakra-ui/react";
 import Stepper from "encuestaraz/app/components/Stepper";
+import { useFormContext } from 'encuestaraz/app/FormContext';
 
 export default function Page() {
+  const { formData } = useFormContext();
+
+  const validateForm = () => {
+    return Boolean(formData.email && formData.edad && formData.nombre && formData.apellido && formData.ocupacion);
+  };
+
   return (
     <Box
       bgImage="url('bgs/b2.jpg')"
@@ -29,7 +36,7 @@ export default function Page() {
         <CustomInput name="ocupacion" label="Ocupación" placeholder={"¿A qué te dedicas? Ejemplo: Estudiante, contadora..."}/>
       </VStack>
       <Box paddingTop={"0px"}>
-        <NavigationButtons next={"/shopping-preferences"} back={"/"}/>
+        <NavigationButtons next={"/shopping-preferences"} back={"/"} validateForm={validateForm}/>
       </Box>
     </Box>
   );

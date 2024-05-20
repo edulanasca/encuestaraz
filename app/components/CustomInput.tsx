@@ -23,6 +23,7 @@ export default function CustomInput({name, label, placeholder}: CustomInputProps
         color='rgb(196,213,249)'
         textAlign={"center"}
         fontFamily={"montserrat"}
+        px={2}
       >
         {label}
       </FormLabel>

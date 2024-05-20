@@ -5,8 +5,14 @@ import NavigationButtons from "encuestaraz/app/components/NavigationButtons";
 import {Box, Center} from "@chakra-ui/react";
 import Stepper from "encuestaraz/app/components/Stepper";
 import CustomDivider from "encuestaraz/app/components/CustomDivider";
+import {useFormContext} from "encuestaraz/app/FormContext";
 
 export default function Page() {
+  const { formData } = useFormContext();
+  function validateForm() {
+    return Boolean(formData.preferenciaCompra && formData.metodoPagoFisica && formData.metodoPagoOnline);
+  }
+
   return (
     <Box
       bgImage="url('bgs/b3.jpg')"
@@ -15,7 +21,7 @@ export default function Page() {
       bgSize="cover"
       minHeight="100vh"
     >
-      <Center paddingTop={"50px"}>
+      <Center paddingTop={"22px"}>
         <Stepper ix={1} total={3}/>
       </Center>
       <CustomRadioGroup
@@ -52,7 +58,7 @@ export default function Page() {
           "No hago compras en internet"
         ]}
       />
-      <NavigationButtons next={"/clothing-preferences"} back={"/personal-info"}/>
+      <NavigationButtons next={"/clothing-preferences"} back={"/personal-info"} validateForm={validateForm}/>
     </Box>
   );
 }

@@ -7,7 +7,8 @@ const theme = extendTheme({
     bodoniModa: 'Bodoni Moda, serif',
   },
   colors: {
-    shoppingPreferencesCheckbox: "rgb(8, 17, 43)"
+    shoppingPreferencesCheckbox: "rgb(8, 17, 43)",
+    montaGold: "rgb(203, 150, 71)"
   }
 });
 

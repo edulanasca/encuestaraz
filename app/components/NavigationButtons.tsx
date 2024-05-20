@@ -6,9 +6,10 @@ interface NavigationButtonsProps {
   next: string;
   back: string;
   isLastPage?: boolean;
+  validateForm?: () => boolean;
 }
 
-export default function NavigationButtons({next, back, isLastPage}: NavigationButtonsProps) {
+export default function NavigationButtons({next, back, isLastPage, validateForm}: NavigationButtonsProps) {
   const router = useRouter();
   const {formData} = useFormContext();
   const toast = useToast();
@@ -36,6 +37,16 @@ export default function NavigationButtons({next, back, isLastPage}: NavigationBu
         console.error('Error:', error);
       }
     } else {
+      if (validateForm && !validateForm()) {
+        toast({
+          title: "Form Incompleto",
+          description: "Por favor llena todos los campos.",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+        });
+        return;
+      }
       router.push(next);
     }
   }
@@ -53,7 +64,7 @@ export default function NavigationButtons({next, back, isLastPage}: NavigationBu
         onClick={goBack}
         colorScheme="unstyled"
         size="sm"
-        textColor="rgb(203, 150, 71)"
+        textColor="montaGold"
         borderBottom="2px solid rgb(203, 150, 71)"
         borderBottomRadius={0}
         borderBottomWidth="thick"
@@ -66,7 +77,7 @@ export default function NavigationButtons({next, back, isLastPage}: NavigationBu
         onClick={goNext}
         colorScheme="unstyled"
         size="sm"
-        textColor="rgb(203, 150, 71)"
+        textColor="montaGold"
         borderBottom="2px solid rgb(203, 150, 71)"
         borderBottomRadius={0}
         borderBottomWidth="thick"
