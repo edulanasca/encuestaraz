@@ -64,6 +64,7 @@ export default function Page() {
       flexDirection={"column"}
       py={"30%"}
       color={"white"}
+      px={"6%"}
     >
       <VStack gap={4}>
         <Text

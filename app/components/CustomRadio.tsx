@@ -6,10 +6,10 @@ interface RadioCardProps extends PropsWithChildren, UseRadioProps {
 }
 
 export default function RadioCard({ shape, ...props }: RadioCardProps) {
-  const { getInputProps, getCheckboxProps } = useRadio(props);
+  const { getInputProps, getRadioProps } = useRadio(props);
 
   const input = getInputProps();
-  const checkbox = getCheckboxProps();
+  const checkbox = getRadioProps();
 
   const borderRadius = {
     top: {

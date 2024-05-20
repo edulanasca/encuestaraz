@@ -65,6 +65,7 @@ export default function Page() {
         <CustomInput
           name={"gastoConjuntoRopa"}
           label={"¿Cuanto gastas aproximadamente en un conjunto completo de ropa? (zapatos, pantalon, blusa, accesorios y demas)"}
+          isNumber
         />
       </Box>
       <CustomDivider/>
@@ -74,9 +75,7 @@ export default function Page() {
           label={"¿Cual es tu marca o tienda de ropa favorita? ¿Puedes contarnos por qué lo es?"}
         />
       </Box>
-      <Box pt={8} pb={10}>
-        <NavigationButtons next={"/summary"} back={"/shopping-preferences"} validateForm={validateForm} isLastPage/>
-      </Box>
+      <NavigationButtons next={"/summary"} back={"/shopping-preferences"} validateForm={validateForm} isLastPage/>
     </Box>
   );
 }

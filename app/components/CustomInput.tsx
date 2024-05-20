@@ -7,13 +7,17 @@ interface CustomInputProps {
   name: keyof Encuestaraz;
   label: string;
   placeholder?: string;
+  isNumber?: boolean;
 }
 
-export default function CustomInput({name, label, placeholder}: CustomInputProps) {
+export default function CustomInput({name, label, placeholder, isNumber}: CustomInputProps) {
   const {formData, updateFormData} = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateFormData({[name]: event.target.value});
+    const value = event.target.value;
+    if (!isNumber || value.match(/^\d*$/)) {
+      updateFormData({[name]: value});
+    }
   };
 
   return (
@@ -29,6 +33,7 @@ export default function CustomInput({name, label, placeholder}: CustomInputProps
       </FormLabel>
       <Input
         id={name}
+        type={isNumber ? "number" : "text"}
         value={formData[name] as string}
         onChange={handleChange}
         placeholder={placeholder}

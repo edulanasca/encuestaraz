@@ -21,16 +21,16 @@ export default function Page() {
       bgSize="cover"
       minHeight="100vh"
     >
-      <Center paddingTop={"100px"}>
+      <Center paddingTop={"70px"}>
         <Stepper ix={0} total={3}/>
       </Center>
       <VStack
         gap={8}
-        paddingY={"80px"}
+        paddingY={"60px"}
         paddingX={"40px"}
       >
         <CustomInput name="email" label="Correo electrónico" placeholder={"Ejemplo: clara.bow@gmail.com"}/>
-        <CustomInput name="edad" label="Edad" placeholder={"Tu edad en números. Ejemplo: 37"}/>
+        <CustomInput name="edad" label="Edad" placeholder={"Tu edad en números. Ejemplo: 37"} isNumber/>
         <CustomInput name="nombre" label="Nombre" placeholder={"Tu primer nombre"}/>
         <CustomInput name="apellido" label="Apellido" placeholder={"Tu primer apellido"}/>
         <CustomInput name="ocupacion" label="Ocupación" placeholder={"¿A qué te dedicas? Ejemplo: Estudiante, contadora..."}/>

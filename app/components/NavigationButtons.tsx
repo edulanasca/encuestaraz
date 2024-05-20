@@ -1,6 +1,7 @@
 import {Button, HStack, useToast} from "@chakra-ui/react";
 import {useRouter} from "next/navigation";
 import {useFormContext} from "encuestaraz/app/FormContext";
+import {useState} from "react";
 
 interface NavigationButtonsProps {
   next: string;
@@ -13,10 +14,22 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
   const router = useRouter();
   const {formData} = useFormContext();
   const toast = useToast();
+  const [isSaving, setIsSaving] = useState(false);
 
   async function goNext() {
+    if (validateForm && !validateForm()) {
+      toast({
+        title: "Form Incompleto",
+        description: "Por favor llena todos los campos.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     if (isLastPage) {
-      // Include here the use of the endpoint
+      setIsSaving(true);
       try {
         const response = await fetch('/api/save', {
           method: 'POST',
@@ -29,25 +42,15 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
         const result = await response.json();
         if (response.ok) {
           toast({description: result.message, status: "success"});
+          router.push(next);
         } else {
           toast({title: "Ops!", description: result.message || "Something went wrong", status: "error"});
         }
       } catch (error) {
         toast({title: "Ops!", description: error?.toString(), status: "error"});
         console.error('Error:', error);
+        setIsSaving(false);
       }
-    } else {
-      if (validateForm && !validateForm()) {
-        toast({
-          title: "Form Incompleto",
-          description: "Por favor llena todos los campos.",
-          status: "warning",
-          duration: 5000,
-          isClosable: true,
-        });
-        return;
-      }
-      router.push(next);
     }
   }
 
@@ -59,6 +62,7 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
     <HStack
       gap={6}
       justifyContent="center"
+      pt={8} pb={10}
     >
       <Button
         onClick={goBack}
@@ -70,6 +74,7 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
         borderBottomWidth="thick"
         fontFamily="montserrat"
         fontWeight="bold"
+        isLoading={isSaving}
       >
         Retroceder
       </Button>
@@ -83,6 +88,7 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
         borderBottomWidth="thick"
         fontFamily="montserrat"
         fontWeight="bold"
+        isLoading={isSaving}
       >
         {isLastPage ? "Finalizar" : "Continuar"}
       </Button>
