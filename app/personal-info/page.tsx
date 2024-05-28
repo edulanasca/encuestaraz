@@ -31,8 +31,8 @@ export default function Page() {
       >
         <CustomInput name="email" label="Correo electrónico" placeholder={"Ejemplo: clara.bow@gmail.com"}/>
         <CustomInput name="edad" label="Edad" placeholder={"Tu edad en números. Ejemplo: 37"} isNumber/>
-        <CustomInput name="nombre" label="Nombre" placeholder={"Tu primer nombre"}/>
-        <CustomInput name="apellido" label="Apellido" placeholder={"Tu primer apellido"}/>
+        <CustomInput name="nombre" label="Nombre" placeholder={"Tu nombre preferido"}/>
+        <CustomInput name="apellido" label="Apellido" placeholder={"Tu apellido"}/>
         <CustomInput name="ocupacion" label="Ocupación" placeholder={"¿A qué te dedicas? Ejemplo: Estudiante, contadora..."}/>
       </VStack>
       <Box paddingTop={"0px"}>

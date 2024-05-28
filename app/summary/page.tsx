@@ -4,31 +4,30 @@
 import {Box, Center, IconButton, Image, Spacer, Text, useToast, VStack} from "@chakra-ui/react";
 import {useFormContext} from "encuestaraz/app/FormContext";
 import {CheckIcon} from "@chakra-ui/icons";
-import {useState} from "react";
 
 export default function Page() {
-  const {formData} = useFormContext();
+  const {formData, updateFormData} = useFormContext();
   const toast = useToast();
-  const [isSubscribed, setIsSubscribed] = useState(false);
   const subStyle = {color: "montaGold", border: "1px solid rgb(203, 150, 71)"};
-
+  //const [isSubscribed, setIsSubscribed] = useState(formData.suscrito);
+  console.log(formData.suscrito);
   async function onSubscribe() {
     try {
-      if (isSubscribed) {
+      if (formData.suscrito) {
         const response = await fetch('/api/subscribe', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({email: formData.email}),
+          body: JSON.stringify({id: formData.id}),
         });
 
         const result = await response.json();
         if (response.ok) {
           toast({description: result.message});
-          setIsSubscribed(false); // Update the subscription status
+          updateFormData({suscrito: false});
         } else {
-          toast({title: "Ops!", description: result.message || "Something went wrong", status: "error"});
+          toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
         }
 
       } else {
@@ -37,15 +36,15 @@ export default function Page() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({email: formData.email}),
+          body: JSON.stringify({id: formData.id}),
         });
 
         const result = await response.json();
         if (response.ok) {
           toast({description: result.message});
-          setIsSubscribed(true);
+          updateFormData({suscrito: true});
         } else {
-          toast({title: "Ops!", description: result.message || "Something went wrong", status: "error"});
+          toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
         }
       }
     } catch (error) {
@@ -140,8 +139,8 @@ export default function Page() {
           icon={<CheckIcon/>}
           onClick={onSubscribe}
           bg={"transparent"}
-          border={isSubscribed ? subStyle.border : "1px solid white"}
-          color={isSubscribed ? subStyle.color : "white"}
+          border={formData.suscrito ? subStyle.border : "1px solid white"}
+          color={formData.suscrito ? subStyle.color : "white"}
           borderRadius={"100%"}
           _hover={{...subStyle}}
         />

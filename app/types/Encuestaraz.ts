@@ -1,4 +1,5 @@
 export default interface Encuestaraz {
+  id: string;
   email: string;
   edad: string;
   nombre: string;
@@ -12,4 +13,5 @@ export default interface Encuestaraz {
   frecuenciaCompra: string;
   gastoConjuntoRopa: string;
   marcaTiendaFavorita: string;
+  suscrito: boolean;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Input, FormControl, FormLabel} from '@chakra-ui/react';
-import {useFormContext} from 'encuestaraz/app/FormContext';
+import { Input, FormControl, FormLabel } from '@chakra-ui/react';
+import { useFormContext } from 'encuestaraz/app/FormContext';
 import Encuestaraz from "encuestaraz/app/types/Encuestaraz";
 
 interface CustomInputProps {
@@ -10,13 +10,13 @@ interface CustomInputProps {
   isNumber?: boolean;
 }
 
-export default function CustomInput({name, label, placeholder, isNumber}: CustomInputProps) {
-  const {formData, updateFormData} = useFormContext();
+export default function CustomInput({ name, label, placeholder, isNumber }: CustomInputProps) {
+  const { formData, updateFormData } = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (!isNumber || value.match(/^\d*$/)) {
-      updateFormData({[name]: value});
+      updateFormData({ [name]: value });
     }
   };
 
@@ -28,6 +28,8 @@ export default function CustomInput({name, label, placeholder, isNumber}: Custom
         textAlign={"center"}
         fontFamily={"montserrat"}
         px={2}
+        fontSize="lg"
+        fontWeight="bold"
       >
         {label}
       </FormLabel>
@@ -37,7 +39,7 @@ export default function CustomInput({name, label, placeholder, isNumber}: Custom
         value={formData[name] as string}
         onChange={handleChange}
         placeholder={placeholder}
-        _placeholder={{textAlign: "center", textColor: "rgb(85,93,160)", fontSize: "xs"}}
+        _placeholder={{ textAlign: "center", textColor: "rgb(85,93,160)", fontSize: "xs" }}
         borderRadius="full"
         color='rgb(85,93,160)'
         backgroundColor="rgb(196,213,249)"

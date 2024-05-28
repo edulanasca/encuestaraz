@@ -7,6 +7,7 @@ const FormContext = createContext<{
   updateFormData: (newData: Partial<Encuestaraz>) => void
 }>({
   formData: {
+    id: "",
     apellido: "",
     calidadPrenda: "",
     edad: "",
@@ -20,6 +21,7 @@ const FormContext = createContext<{
     ocupacion: "",
     preferenciaCompra: "",
     prioridadCompra: "",
+    suscrito: false,
   },
   updateFormData: () => {
   }

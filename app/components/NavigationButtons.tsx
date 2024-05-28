@@ -12,7 +12,7 @@ interface NavigationButtonsProps {
 
 export default function NavigationButtons({next, back, isLastPage, validateForm}: NavigationButtonsProps) {
   const router = useRouter();
-  const {formData} = useFormContext();
+  const {formData, updateFormData} = useFormContext();
   const toast = useToast();
   const [isSaving, setIsSaving] = useState(false);
 
@@ -26,9 +26,7 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
         isClosable: true,
       });
       return;
-    }
-
-    if (isLastPage) {
+    } else if (isLastPage) {
       setIsSaving(true);
       try {
         const response = await fetch('/api/save', {
@@ -41,16 +39,19 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
 
         const result = await response.json();
         if (response.ok) {
+          updateFormData({id: result.result.insertedId});
           toast({description: result.message, status: "success"});
           router.push(next);
         } else {
-          toast({title: "Ops!", description: result.message || "Something went wrong", status: "error"});
+          toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
         }
       } catch (error) {
         toast({title: "Ops!", description: error?.toString(), status: "error"});
         console.error('Error:', error);
         setIsSaving(false);
       }
+    } else {
+      router.push(next);
     }
   }
 

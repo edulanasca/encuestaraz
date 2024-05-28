@@ -15,8 +15,8 @@ export async function POST(req: Request) {
     const collection = db.collection<Encuestaraz>('encuestaraz');
     const result = await collection.insertOne(data);
 
-    return NextResponse.json({message: "Data saved successfully", result}, {status: 201});
+    return NextResponse.json({message: "Tus respuestas fueron guardadas 😊", result}, {status: 201});
   } catch (error) {
-    return NextResponse.json({message: "Failed to save data", error}, {status: 500});
+    return NextResponse.json({message: "Hubo un error al guardar tus respuestas 😔", error}, {status: 500});
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Textarea, FormControl, FormLabel} from '@chakra-ui/react';
-import {useFormContext} from 'encuestaraz/app/FormContext';
+import { Textarea, FormControl, FormLabel } from '@chakra-ui/react';
+import { useFormContext } from 'encuestaraz/app/FormContext';
 import Encuestaraz from "encuestaraz/app/types/Encuestaraz";
 
 interface CustomInputProps {
@@ -9,21 +9,24 @@ interface CustomInputProps {
   placeholder: string;
 }
 
-export default function CustomTextArea({name, placeholder, label}: CustomInputProps) {
-  const {formData, updateFormData} = useFormContext();
+export default function CustomTextArea({ name, placeholder, label }: CustomInputProps) {
+  const { formData, updateFormData } = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateFormData({[name]: event.target.value});
+    updateFormData({ [name]: event.target.value });
   };
 
   return (
-    <FormControl>
+    <FormControl isRequired>
       <FormLabel
         htmlFor={name}
         color="rgb(196,213,249)"
         fontFamily="montserrat"
         fontWeight="bold"
-      >{label}</FormLabel>
+        fontSize="lg"
+      >
+        {label}
+      </FormLabel>
       <Textarea
         id={name}
         value={formData[name] as string}

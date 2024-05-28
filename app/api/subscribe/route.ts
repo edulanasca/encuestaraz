@@ -1,4 +1,5 @@
 // app/api/subscribe/route.ts
+import { ObjectId } from 'mongodb';
 import clientPromise from '../../../lib/mongodb';
 import { NextResponse } from "next/server";
 
@@ -7,25 +8,25 @@ export async function POST(req: Request) {
     const client = await clientPromise;
     const db = client.db(process.env.DB_NAME);
 
-    const { email } = await req.json();
+    const { id } = await req.json();
 
-    if (!email) {
-      return NextResponse.json({ message: "Email is required" }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ message: "Falta el ID" }, { status: 400 });
     }
 
     const collection = db.collection('encuestaraz');
     const result = await collection.updateOne(
-      { email },
-      { $set: { subscribe: true } }
+      { _id: new ObjectId(id as string) },
+      { $set: { suscrito: true } }
     );
 
     if (result.modifiedCount === 0) {
-      return NextResponse.json({ message: "No records found or already subscribed" }, { status: 404 });
+      return NextResponse.json({ message: "No te encontramos o ya estabas suscrito" }, { status: 404 });
     }
 
-    return NextResponse.json({ message: "Subscription updated successfully" }, { status: 200 });
+    return NextResponse.json({ message: "Suscripción exitosa 😃" }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: "Failed to update subscription", error }, { status: 500 });
+    return NextResponse.json({ message: "Hubo un error al suscribirte 😔", error }, { status: 500 });
   }
 }
 
@@ -34,23 +35,24 @@ export async function DELETE(req: Request) {
     const client = await clientPromise;
     const db = client.db(process.env.DB_NAME);
 
-    const { email } = await req.json();
+    const { id } = await req.json();
 
-    if (!email) {
-      return NextResponse.json({ message: "Email is required" }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ message: "Falta el ID" }, { status: 400 });
     }
 
     const collection = db.collection('encuestaraz');
-    const result = await collection.deleteOne(
-      { email, subscribe: true }  // Check if the user is subscribed before deleting
+    const result = await collection.updateOne(
+      { _id: new ObjectId(id as string) },
+      { $set: { suscrito: false } }
     );
 
-    if (result.deletedCount === 0) {
-      return NextResponse.json({ message: "User is not subscribed or email not found" }, { status: 404 });
+    if (result.modifiedCount === 0) {
+      return NextResponse.json({ message: "ID no encontrado" }, { status: 404 });
     }
 
-    return NextResponse.json({ message: "Unsubscribed successfully" }, { status: 200 });
+    return NextResponse.json({ message: "Desuscripción exitosa 😃" }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: "Failed to unsubscribe user", error }, { status: 500 });
+    return NextResponse.json({ message: "Ocurrió un error al desuscribirte 😔", error }, { status: 500 });
   }
 }

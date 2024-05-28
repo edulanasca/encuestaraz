@@ -26,12 +26,12 @@ export default function Page() {
       </Center>
       <CustomRadioGroup
         prop={"preferenciaCompra"}
-        text={"¿En donde prefieres comprar ropa?"}
+        text={"¿En dónde prefieres comprar ropa?"}
         options={[
-          "Totalmente por internet.",
-          "Mayormente en internet, aunque a veces compro en tienda fisica.",
-          "Mayormente en tienda fisica, aunque a veces compro en internet.",
-          "Totalmente en tienda fisica."
+          "Totalmente por internet",
+          "Mayormente en internet, aunque a veces compro en tienda física",
+          "Mayormente en tienda física, aunque a veces compro en internet",
+          "Totalmente en tienda física"
         ]}
       />
       <CustomDivider/>
@@ -43,7 +43,7 @@ export default function Page() {
           "Datáfono (crédito o débito)",
           "Servicios de terceros (PayPal, Addi...)",
           "Aplicaciones de bajo monto (Nequi, Daviplata...)",
-          "No hago compras en tienda física."
+          "No hago compras en tienda física"
         ]}
       />
       <CustomDivider/>
@@ -53,7 +53,7 @@ export default function Page() {
         options={[
           "Efectivo (Efecty)",
           "Pago por PSE",
-          "Pago con tarjeta de crédito o débito.",
+          "Pago con tarjeta de crédito o débito",
           "Aplicaciones de bajo monto (Nequi, Daviplata...)",
           "No hago compras en internet"
         ]}

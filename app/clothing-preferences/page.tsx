@@ -41,22 +41,22 @@ export default function Page() {
         <CustomTextArea
           name={"calidadPrenda"}
           label={"¿Cómo te das cuenta que una prenda es de mala calidad?"}
-          placeholder={"¿En qué factores te fijas? (Hilos, costuras, resistencia...)"}
+          placeholder={"¿En qué factores te fijas?"}
         />
       </Box>
       <CustomDivider/>
       <Box py={2}>
         <CustomRadioGroup
           prop={"frecuenciaCompra"}
-          text={"¿Con que frecuencia compras ropa? (puedes marcar un aproximado)."}
+          text={"¿Con qué frecuencia compras ropa? (puedes marcar un aproximado)."}
           options={[
-            "Compro una o más veces por semana.",
-            "Compro cada dos semanas.",
-            "Compro una vez por mes.",
-            "Compro cada dos meses.",
-            "Compro cada tres meses.",
-            "Compro cada seis meses.",
-            "Compro una vez por año o menos."
+            "Compro una o más veces por semana",
+            "Compro cada dos semanas",
+            "Compro una vez por mes",
+            "Compro cada dos meses",
+            "Compro cada tres meses",
+            "Compro cada seis meses",
+            "Compro una vez por año o menos"
           ]}
         />
       </Box>
@@ -64,7 +64,8 @@ export default function Page() {
       <Box py={6} px={10}>
         <CustomInput
           name={"gastoConjuntoRopa"}
-          label={"¿Cuanto gastas aproximadamente en un conjunto completo de ropa? (zapatos, pantalon, blusa, accesorios y demas)"}
+          label={"¿Cuánto gastas aproximadamente en un conjunto completo de ropa? (zapatos, pantalón, blusa, accesorios y demás)"}
+          placeholder="Da tu respuesta en pesos colombianos"
           isNumber
         />
       </Box>
@@ -72,7 +73,7 @@ export default function Page() {
       <Box py={6} px={10}>
         <CustomInput
           name={"marcaTiendaFavorita"}
-          label={"¿Cual es tu marca o tienda de ropa favorita? ¿Puedes contarnos por qué lo es?"}
+          label={"¿Cuál es tu marca o tienda de ropa favorita? ¿Puedes contarnos por qué lo es?"}
         />
       </Box>
       <NavigationButtons next={"/summary"} back={"/shopping-preferences"} validateForm={validateForm} isLastPage/>
