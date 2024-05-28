@@ -8,6 +8,7 @@ import {Box, Center} from "@chakra-ui/react";
 import Stepper from "encuestaraz/app/components/Stepper";
 import CustomDivider from "encuestaraz/app/components/CustomDivider";
 import {useFormContext} from "encuestaraz/app/FormContext";
+import HorizontalRadio from "encuestaraz/app/components/HorizontalRadio";
 
 export default function Page() {
   const {formData} = useFormContext();
@@ -27,13 +28,15 @@ export default function Page() {
       <Center paddingTop={"40px"} paddingBottom={"20px"}>
         <Stepper ix={1} total={3}/>
       </Center>
-      <CustomRadioGroup
+      <HorizontalRadio
         prop={"prioridadCompra"}
         text={"¿Qué priorizo más al comprar ropa?"}
         options={[
-          "Calidad de la prenda",
-          "Calidad / Precio",
-          "Buen precio"
+          "Calidad \nprenda",
+          "xalidad \nprenda",
+          "Calidad \n/Precio",
+          "xuen \nprecio",
+          "Buen \nprecio"
         ]}
       />
       <CustomDivider/>
