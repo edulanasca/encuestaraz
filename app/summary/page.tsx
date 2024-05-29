@@ -1,14 +1,14 @@
 'use client';
 
 
-import {Box, Center, IconButton, Image, Spacer, Text, useToast, VStack} from "@chakra-ui/react";
-import {useFormContext} from "encuestaraz/app/FormContext";
-import {CheckIcon} from "@chakra-ui/icons";
+import { Box, Center, IconButton, Image, Spacer, Text, useToast, VStack } from "@chakra-ui/react";
+import { useFormContext } from "encuestaraz/app/FormContext";
+import { CheckIcon } from "@chakra-ui/icons";
 
 export default function Page() {
-  const {formData, updateFormData} = useFormContext();
+  const { formData, updateFormData } = useFormContext();
   const toast = useToast();
-  const subStyle = {color: "montaGold", border: "1px solid rgb(203, 150, 71)"};
+  const subStyle = { color: "montaGold", border: "1px solid rgb(203, 150, 71)" };
   //const [isSubscribed, setIsSubscribed] = useState(formData.suscrito);
   console.log(formData.suscrito);
   async function onSubscribe() {
@@ -19,15 +19,15 @@ export default function Page() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({id: formData.id}),
+          body: JSON.stringify({ id: formData.id, email: formData.email }),
         });
 
         const result = await response.json();
         if (response.ok) {
-          toast({description: result.message});
-          updateFormData({suscrito: false});
+          toast({ description: result.message });
+          updateFormData({ suscrito: false });
         } else {
-          toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
+          toast({ title: "Ops!", description: result.message || "Algo salió mal", status: "error" });
         }
 
       } else {
@@ -36,19 +36,19 @@ export default function Page() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({id: formData.id}),
+          body: JSON.stringify({ id: formData.id, email: formData.email }),
         });
 
         const result = await response.json();
         if (response.ok) {
-          toast({description: result.message});
-          updateFormData({suscrito: true});
+          toast({ description: result.message });
+          updateFormData({ suscrito: true });
         } else {
-          toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
+          toast({ title: "Ops!", description: result.message || "Algo salió mal", status: "error" });
         }
       }
     } catch (error) {
-      toast({title: "Ops!", description: error?.toString(), status: "error"});
+      toast({ title: "Ops!", description: error?.toString(), status: "error" });
       console.error('Error:', error);
     }
   }
@@ -82,7 +82,7 @@ export default function Page() {
           Hemos llegado al final, aunque es ahora cuando comienza nuestro camino.
         </Text>
       </VStack>
-      <Spacer/>
+      <Spacer />
       <Text
         textAlign={"center"}
         fontFamily={"bodoniModa"}
@@ -106,10 +106,10 @@ export default function Page() {
       <Image
         src={"Listonflat.png"}
         alt={"Liston"}
-        w={{base: `${Math.round(1166 / 10)}px`}}
-        h={{base: `${Math.round(640 / 10)}px`}}
+        w={{ base: `${Math.round(1166 / 10)}px` }}
+        h={{ base: `${Math.round(640 / 10)}px` }}
       />
-      <Spacer/>
+      <Spacer />
       <VStack gap={4}>
         <Box>
           <Text
@@ -136,13 +136,13 @@ export default function Page() {
         </Text>
         <IconButton
           aria-label={"accept"}
-          icon={<CheckIcon/>}
+          icon={<CheckIcon />}
           onClick={onSubscribe}
           bg={"transparent"}
           border={formData.suscrito ? subStyle.border : "1px solid white"}
           color={formData.suscrito ? subStyle.color : "white"}
           borderRadius={"100%"}
-          _hover={{...subStyle}}
+          _hover={{ ...subStyle }}
         />
       </VStack>
       <VStack gap={4} justifyContent={"center"} alignItems={"center"}>

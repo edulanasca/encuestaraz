@@ -17,7 +17,7 @@ export default function CustomRadioGroup({ prop, text, options }: CustomRadioGro
   };
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'shoppingPreference',
+    name: prop,
     defaultValue: formData[prop]?.toString(),
     onChange: updateFunc,
   });

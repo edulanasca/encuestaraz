@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource-variable/bodoni-moda": "^5.0.15",
     "@fontsource-variable/montserrat": "^5.0.19",
+    "axios": "^1.7.2",
     "framer-motion": "^11.1.9",
     "mongodb": "^6.6.2",
     "next": "14.2.3",

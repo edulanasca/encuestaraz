@@ -1,6 +1,8 @@
-import { Flex, FormControl, FormLabel, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, useSteps } from "@chakra-ui/react"
+import { Flex, FormControl, FormLabel, RadioGroup, Radio, Stack, Box } from "@chakra-ui/react"
 import Encuestaraz from "../types/Encuestaraz";
-import { Fragment } from "react";
+import React from "react";
+import { useFormContext } from "../FormContext";
+import { log } from "console";
 
 interface HorizontalRadioProps {
     prop: keyof Encuestaraz;
@@ -9,15 +11,11 @@ interface HorizontalRadioProps {
 }
 
 export default function HorizontalRadio({ prop, text, options }: HorizontalRadioProps) {
-    const { activeStep, setActiveStep } = useSteps({
-        index: 1,
-        count: options.length,
-    })
+    const { formData, updateFormData } = useFormContext();
 
-    function handleClick(index: number) {
-        console.log(index)
-        setActiveStep(index);
-    }
+    const updateFunc = (newVal: string) => {
+      updateFormData({ ...formData, [prop]: newVal });
+    };
 
     return (
         <FormControl py={4} px={8} borderRadius="md" isRequired>
@@ -30,34 +28,35 @@ export default function HorizontalRadio({ prop, text, options }: HorizontalRadio
             >
                 {text}
             </FormLabel>
-            <Stepper size={{base: 'md', md: 'lg'}} index={activeStep} colorScheme="yellow">
-                {options.map((option, index) => (
-                    <Step key={index} onClick={() => handleClick(index)}>
-                        <Flex flexDirection="column" alignItems="center" gap={2} textAlign={"center"}>
-                            <StepIndicator backgroundColor="transparent">
-                                <StepStatus
-                                    active={`⭐️`}
-                                    complete={`⭐️`}
-                                />
-                            </StepIndicator>
-                            <StepDescription
-                                color={option.startsWith("x") ? "transparent" : "rgb(196,213,249)"}
-                                fontSize={{ base: "xs", md: "md" }}
-                            >
-                                {
-                                    option.split("\n").map((line, idx) => (
-                                        <p key={idx}>
-                                            {line}
-                                            {idx !== option.split("\n").length - 1 && <br />}
-                                        </p>
-                                    ))
-                                }
-                            </StepDescription>
-                        </Flex>
-                    </Step>
-                ))}
-            </Stepper>
+            <RadioGroup onChange={updateFunc} value={formData[prop]?.toString() ?? ""}>
+                <Stack direction="row" justify={{base: "center", md: "space-between"}}>
+                    {options.map((option, index) => (
+                        <Radio
+                        key={index}
+                        value={option}
+                        display={"flex"}
+                        flexDirection={"column"}
+                        backgroundColor={"black"}
+                        borderColor={"black"}
+                        _checked={{
+                            backgroundColor: "gold",
+                            borderColor: "gold",
+                            filter: "blur(1px)",
+                        }}
+                        >
+                            <Flex flexDirection="column" alignItems="center" textAlign="center" marginLeft={0}>
+                                {option.split("\n").map((line, idx) => (
+                                    <Box key={idx} color={option.startsWith("x") ? "transparent" : "rgb(196,213,249)"}>
+                                        {line}
+                                        {idx !== option.split("\n").length - 1 && <br />}
+                                    </Box>
+                                ))}
+                            </Flex>
+                        </Radio>
+                    ))}
+                </Stack>
+            </RadioGroup>
         </FormControl>
-
     )
 }
+

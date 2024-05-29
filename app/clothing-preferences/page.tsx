@@ -33,9 +33,11 @@ export default function Page() {
         text={"¿Qué priorizo más al comprar ropa?"}
         options={[
           "Calidad \nprenda",
-          "xalidad \nprenda",
+          "xCi \np2",
+          "xCi \np3",
           "Calidad \n/Precio",
-          "xuen \nprecio",
+          "xCi \np5",
+          "xCi \np6",
           "Buen \nprecio"
         ]}
       />
@@ -74,9 +76,10 @@ export default function Page() {
       </Box>
       <CustomDivider/>
       <Box py={6} px={10}>
-        <CustomInput
+        <CustomTextArea
           name={"marcaTiendaFavorita"}
           label={"¿Cuál es tu marca o tienda de ropa favorita? ¿Puedes contarnos por qué lo es?"}
+          placeholder={""}
         />
       </Box>
       <NavigationButtons next={"/summary"} back={"/shopping-preferences"} validateForm={validateForm} isLastPage/>
