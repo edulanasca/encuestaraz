@@ -1,18 +1,18 @@
 import { PropsWithChildren } from "react";
-import { Box, useRadio, UseRadioProps, Flex } from "@chakra-ui/react";
+import { Box, useRadio, UseRadioProps, Flex, FlexProps } from "@chakra-ui/react";
 
 interface RadioCardProps extends PropsWithChildren, UseRadioProps {
-  shape: 'top' | 'middle' | 'bottom';
+  customParentStyles?: FlexProps
 }
 
-export default function RadioCard({ shape, ...props }: RadioCardProps) {
+export default function RadioCard({ ...props }: RadioCardProps) {
   const { getInputProps, getRadioProps } = useRadio(props);
 
   const input = getInputProps();
   const checkbox = getRadioProps();
 
   return (
-    <Flex as="label" alignItems="center" columnGap="16px">
+    <Flex as="label" alignItems="center" columnGap="16px" {...props.customParentStyles}>
       <input {...input} />
       <Box
         {...checkbox}
@@ -30,6 +30,7 @@ export default function RadioCard({ shape, ...props }: RadioCardProps) {
         flex="0 0 auto"
         zIndex="10"
         position="relative"
+        
       />
       {props.children}
     </Flex>

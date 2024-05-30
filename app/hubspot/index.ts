@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Encuestaraz from '../types/Encuestaraz';
 
+const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
+
 export const sendToHubSpot = async (formData: Encuestaraz) => {
     const url = `https://api.hsforms.com/submissions/v3/integration/submit/${process.env.HUBSPOT_PORTAL_ID}/${process.env.HUBSPOT_FORM_ID}`;
 
@@ -19,7 +21,8 @@ export const sendToHubSpot = async (formData: Encuestaraz) => {
     try {
         const response = await axios.post(url, body, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${HUBSPOT_ACCESS_TOKEN}`
             }
         });
         return response.data;
@@ -30,12 +33,12 @@ export const sendToHubSpot = async (formData: Encuestaraz) => {
 };
 
 export const updateHubSpotSubscription = async (email: string, subscribed: boolean) => {
-    const url = `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile?hapikey=${process.env.HUBSPOT_API_KEY}`;
+    const url = `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile`;
 
     const body = {
         properties: [
             {
-                property: "subscribed_to_emails",
+                property: "suscrito",
                 value: subscribed
             }
         ]
@@ -44,7 +47,8 @@ export const updateHubSpotSubscription = async (email: string, subscribed: boole
     try {
         const response = await axios.post(url, body, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${HUBSPOT_ACCESS_TOKEN}`
             }
         });
         return response.data;

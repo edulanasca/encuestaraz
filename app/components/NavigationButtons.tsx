@@ -39,7 +39,7 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
 
         const result = await response.json();
         if (response.ok) {
-          updateFormData({id: result.result.insertedId});
+          updateFormData({_id: result.result.insertedId});
           toast({description: result.message, status: "success"});
           router.push(next);
         } else {

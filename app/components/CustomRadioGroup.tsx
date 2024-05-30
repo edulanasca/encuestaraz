@@ -56,13 +56,11 @@ export default function CustomRadioGroup({ prop, text, options }: CustomRadioGro
             }}
           >
             {options.map((option, index) => {
-              const shape = index === 0 ? 'top' : (index === options.length - 1 ? 'bottom' : 'middle');
               const radio = getRadioProps({ value: option });
               return (
                 <RadioCard
                   key={option}
                   {...radio}
-                  shape={shape}
                 >
                   <Text fontWeight={formData[prop] === option ? "bold" : undefined}>
                     {option}

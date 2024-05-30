@@ -19,7 +19,7 @@ export default function Page() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id: formData.id, email: formData.email }),
+          body: JSON.stringify({ id: formData._id, email: formData.email }),
         });
 
         const result = await response.json();
@@ -36,7 +36,7 @@ export default function Page() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id: formData.id, email: formData.email }),
+          body: JSON.stringify({ id: formData._id, email: formData.email }),
         });
 
         const result = await response.json();

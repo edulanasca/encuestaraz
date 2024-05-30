@@ -1,5 +1,5 @@
 export default interface Encuestaraz {
-  id: string;
+  _id: string;
   email: string;
   edad: string;
   nombre: string;
