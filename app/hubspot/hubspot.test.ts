@@ -10,28 +10,29 @@ describe('HubSpot API Integration Tests', () => {
     nombre: 'John',
     apellido: 'Doe',
     ocupacion: 'Software Developer',
-    preferenciaCompra: 'Online',
-    metodoPagoFisica: 'Tarjeta de crédito',
-    metodoPagoOnline: 'PayPal',
+    preferenciaCompra: 'Mayormente en tienda física, \naunque a veces compro en internet',
+    metodoPagoFisica: 'Datáfono (crédito o débito)',
+    metodoPagoOnline: 'Pago con tarjeta de crédito o débito',
     prioridadCompra: 'Calidad',
     calidadPrenda: 'Alta',
-    frecuenciaCompra: 'Mensual',
+    frecuenciaCompra: 'Compro cada dos semanas',
     gastoConjuntoRopa: '200-500',
     marcaTiendaFavorita: 'BrandX',
-    suscrito: true
+    suscrito: true,
+    timestamp: new Date().getTime() * 1000
   };
 
   it('should send form data to HubSpot successfully', async () => {
     const response = await sendToHubSpot(formData);
     console.log(response);
-    expect(response).toHaveProperty('status', 'success');
+    expect(response).toHaveProperty('inlineMessage', 'Thanks for submitting the form.');
     // Additional assertions can be added here
   });
 
   it('should update HubSpot subscription status successfully', async () => {
     const subscribed = true;
     const response = await updateHubSpotSubscription(formData.email, subscribed);
-    expect(response).toBeUndefined();
+    expect(response).toEqual("");
     // Additional assertions can be added here
   });
 

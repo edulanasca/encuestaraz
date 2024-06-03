@@ -8,14 +8,14 @@ export async function POST(req: Request) {
     const client = await clientPromise;
     const db = client.db(process.env.DB_NAME);
 
-    const data: Encuestaraz & { timestamp: Date } = {
+    const data: Encuestaraz & { timestamp: number } = {
       ...(await req.json()),
-      timestamp: new Date()  // Agrega un timestamp al objeto recibido
+      timestamp: new Date().getTime() * 1000  // Agrega un timestamp al objeto recibido
     };
 
     const collection = db.collection<Encuestaraz>('encuestaraz');
     const result = await collection.insertOne(data);
-    const hubSpotResult = await sendToHubSpot(data);
+    await sendToHubSpot(data);
 
     return NextResponse.json({ message: "Tus respuestas fueron guardadas 😊", result }, { status: 201 });
   } catch (error) {

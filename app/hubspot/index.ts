@@ -8,10 +8,13 @@ export const sendToHubSpot = async (formData: Encuestaraz) => {
 
     const body = {
         submittedAt: new Date().getTime(),
-        fields: Object.keys(formData).map(key => ({
-            name: key,
-            value: formData[key as keyof Encuestaraz]
-        })),
+        fields: Object.keys(formData).map(key => {
+            const param = formData[key as keyof Encuestaraz];
+            return {
+                name: key === '_id' ? 'idencuestaraz' : key,
+                value: typeof param === 'string' ? param.replace(/\n/g, ' ') : param
+            }
+        }),
         context: {
             pageUri: "http://montaraz.com", // Adjust as necessary
             pageName: "Montaraz"
