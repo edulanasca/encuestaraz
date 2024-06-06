@@ -5,14 +5,6 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Encuestaraz</title>
-        <meta
-          name="description"
-          content="Tus respuestas serán nuestra guía para emprender el camino hacia un emocionante proyecto. #montaraz"
-        />
-        <link rel={"icon"} href={"/favicon.ico"} sizes={"any"}/>
-      </Head>
       <Box
         bgImage="url('/bgs/b1.jpg')"
         bgPosition="center"
