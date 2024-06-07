@@ -1,6 +1,6 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import "./globals.css";
-import {Providers} from "encuestaraz/app/providers";
+import { Providers } from "encuestaraz/app/providers";
 import '@fontsource-variable/montserrat';  // Peso medio para Montserrat
 import '@fontsource-variable/bodoni-moda'; // Peso normal para Bodoni Moda
 
@@ -22,14 +22,17 @@ export const metadata: Metadata = {
   icons: "/image/favicon.ico" // "https://encuesta.montaraz.co/public/favicon.ico"
 };
 
-export default function RootLayout({children,}: Readonly<{ children: React.ReactNode; }>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-    <body>
-    <Providers>
-      {children}
-    </Providers>
-    </body>
+      <body>
+        {/* Start of HubSpot Embed Code */}
+        <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44097494.js"></script>
+        {/* End of HubSpot Embed Code */}
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

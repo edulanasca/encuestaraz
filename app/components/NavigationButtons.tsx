@@ -44,6 +44,8 @@ export default function NavigationButtons({next, back, isLastPage, validateForm}
           router.push(next);
         } else {
           toast({title: "Ops!", description: result.message || "Algo salió mal", status: "error"});
+          console.error('Error:', result.message);
+          setIsSaving(false);
         }
       } catch (error) {
         toast({title: "Ops!", description: error?.toString(), status: "error"});
