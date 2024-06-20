@@ -55,7 +55,7 @@ export default function Page() {
 
   return (
     <Center
-      bgImage="url('bgs/b5.jpg')"
+      bgImage="url('bgs/b5.png')"
       bgPosition="center"
       bgRepeat="no-repeat"
       bgSize="cover"

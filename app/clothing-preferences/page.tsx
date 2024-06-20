@@ -19,7 +19,7 @@ export default function Page() {
 
   return (
     <Box
-      bgImage="url('bgs/b4.jpg')"
+      bgImage="url('bgs/b4.png')"
       bgPosition="center"
       bgRepeat="no-repeat"
       bgSize="cover"

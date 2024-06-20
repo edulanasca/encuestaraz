@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Box
-        bgImage="url('/bgs/b1.jpg')"
+        bgImage="url('/bgs/b1.png')"
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"
