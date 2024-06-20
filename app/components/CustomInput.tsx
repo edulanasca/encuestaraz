@@ -40,7 +40,7 @@ export default function CustomInput({ name, label, placeholder, isNumber, number
       {
         isNumber ?
           <NumberInput
-            value={format(Number(formData[name] ?? 0))}
+            value={formData[name] ? format(Number(formData[name])) : ''}
             onChange={(valueString) => handleChange(valueString)}
             {...numberInputProps}
           >
