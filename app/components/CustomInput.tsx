@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, FormControl, FormLabel, NumberInput, NumberInputField, NumberIncrementStepper, NumberInputStepper, NumberDecrementStepper } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, NumberInput, NumberInputField, NumberIncrementStepper, NumberInputStepper, NumberDecrementStepper, NumberInputProps } from '@chakra-ui/react';
 import { useFormContext } from 'encuestaraz/app/FormContext';
 import Encuestaraz from "encuestaraz/app/types/Encuestaraz";
 
@@ -8,9 +8,10 @@ interface CustomInputProps {
   label: string;
   placeholder?: string;
   isNumber?: boolean;
+  numberInputProps?: NumberInputProps;
 }
 
-export default function CustomInput({ name, label, placeholder, isNumber }: CustomInputProps) {
+export default function CustomInput({ name, label, placeholder, isNumber, numberInputProps }: CustomInputProps) {
   const { formData, updateFormData } = useFormContext();
 
   const format = (value: number) => value.toLocaleString();
@@ -41,6 +42,7 @@ export default function CustomInput({ name, label, placeholder, isNumber }: Cust
           <NumberInput
             value={format(Number(formData[name] ?? 0))}
             onChange={(valueString) => handleChange(valueString)}
+            {...numberInputProps}
           >
             <NumberInputField
               borderRadius="full"
