@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, FormControl, FormLabel } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, NumberInput, NumberInputField, NumberIncrementStepper, NumberInputStepper, NumberDecrementStepper } from '@chakra-ui/react';
 import { useFormContext } from 'encuestaraz/app/FormContext';
 import Encuestaraz from "encuestaraz/app/types/Encuestaraz";
 
@@ -13,10 +13,13 @@ interface CustomInputProps {
 export default function CustomInput({ name, label, placeholder, isNumber }: CustomInputProps) {
   const { formData, updateFormData } = useFormContext();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const format = (value: number) => value.toLocaleString();
+  const handleChange = (valueString: string) => {
+    const value = valueString;
     if (!isNumber || value.match(/^\d*$/)) {
       updateFormData({ [name]: value });
+    } else {
+      updateFormData({ [name]: value.replace(/,/g, '') });
     }
   };
 
@@ -33,18 +36,38 @@ export default function CustomInput({ name, label, placeholder, isNumber }: Cust
       >
         {label}
       </FormLabel>
-      <Input
-        id={name}
-        type={isNumber ? "number" : "text"}
-        value={formData[name] as string}
-        onChange={handleChange}
-        placeholder={placeholder}
-        _placeholder={{ textAlign: "center", textColor: "rgb(85,93,160)", fontSize: "xs" }}
-        borderRadius="full"
-        color='rgb(85,93,160)'
-        backgroundColor="rgb(196,213,249)"
-        isRequired
-      />
+      {
+        isNumber ?
+          <NumberInput
+            value={format(Number(formData[name] ?? 0))}
+            onChange={(valueString) => handleChange(valueString)}
+          >
+            <NumberInputField
+              borderRadius="full"
+              color='rgb(85,93,160)'
+              backgroundColor="rgb(196,213,249)"
+              textAlign="center"
+              fontSize="xs"
+              placeholder={placeholder}
+            />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+          :
+          <Input
+            id={name}
+            value={formData[name] as string}
+            onChange={(event) => handleChange(event.target.value)}
+            placeholder={placeholder}
+            _placeholder={{ textAlign: "center", textColor: "rgb(85,93,160)", fontSize: "xs" }}
+            borderRadius="full"
+            color='rgb(85,93,160)'
+            backgroundColor="rgb(196,213,249)"
+            isRequired
+          />
+      }
     </FormControl>
   );
 };
